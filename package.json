@@ -1,0 +1,26 @@
+{
+  "name": "velocation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production"
+  },
+  "author": "didpoule",
+  "license": "ISC",
+  "dependencies": {
+    "@symfony/webpack-encore": "^0.20.1",
+    "ajv": "^6.5.0",
+    "bootstrap": "^4.1.1",
+    "jquery": "^3.3.1",
+    "popper": "^1.0.1",
+    "popper.js": "^1.14.3"
+  },
+  "devDependencies": {
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1"
+  }
+}

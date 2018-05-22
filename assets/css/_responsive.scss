@@ -1,0 +1,12 @@
+@media screen and (max-width: 1024px) {
+  .flex {
+    flex-wrap: wrap-reverse;
+  }
+
+  #map-container {
+    margin: auto;
+  }
+  #station-summary {
+    margin-bottom: 20px;
+  }
+}

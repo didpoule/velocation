@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/app.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <title>Vélocation - Lyon</title>
+    <meta name="description"
+          content="Vélocation vous propose de consulter la carte des statios Velo'v à Lyon mise à jour en temps réel et vous permet d'en réserver un.">
+
+</head>
+<body>
+<div id="page-content">
+    <header>
+        <div class="container flex">
+            <div id="company-name" class="flex">
+                <h1><strong>Vélocation</strong></h1>
+                <span>Réservation de Vélo'v à Lyon</span>
+            </div>
+        </div>
+
+    </header>
+    <div id="slider">
+        <div id="slider-pictures">
+            <img src="public/images/keynote.001.jpeg" alt="">
+            <img src="public/images/keynote.002.jpeg" alt="">
+            <img src="public/images/keynote.003.jpeg" alt="">
+            <img src="public/images/keynote.004.jpeg" alt="">
+            <img src="public/images/keynote.005.jpeg" alt="">
+            <img src="public/images/keynote.006.jpeg" alt="">
+            <img src="public/images/keynote.007.jpeg" alt="">
+            <img src="public/images/keynote.008.jpeg" alt="">
+        </div>
+
+        <div id="slider-nav">
+            <div id="slider-previous">
+                <i class="fas fa-angle-left"></i>
+            </div>
+            <div id="slider-next">
+                <i class="fas fa-angle-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="container flex">
+
+        <div id="map-container">
+        </div>
+        <div id="station-summary" class="card card-body">
+            <h5 id="station-name" class="card-header">CENTRE BERTHELOT</h5>
+            <img id="station-picture" class="card-img-top" src="">
+            <div id="station-details" class="card-body">
+                <h5 class="card-title" id="station-address">CENTRE BERTHELOT</h5>
+                <p class="card-text">Statut: <span id="station-status">Ouverte</span></p>
+                <p class="card-text">Vélos disponibles: <span id="station-bikesFree">2</span> / <span
+                        id="station-bikesTotal">20</span></p>
+                <p class="card-text">Emplacements disponibles: <span id="station-standsFree">10</span></p>
+                <button id="station-booking" class="btn btn-primary d-block">Réserver vélo</button>
+            </div>
+            <div id="canvas-container">
+                <canvas width="250px" height="130px" id="station-booking-canvas"></canvas>
+                <button id="canvas-clear" onclick="window.clearCanvas()"><i class="fas fa-pencil-alt"></i></button>
+                <button id="booking-validation" class="btn btn-primary">Valider</button>
+            </div>
+
+        </div>
+    </div>
+    <footer>
+        <div id="booking-container" class="container background-grey">
+            <div id="booking-informations" class="card card-body">
+                <h3 id="booking-title" class="cart-title">Informations sur votre réservation</h3>
+                <span id="booking-default" class="card-text">Vous n'avez pas encore de réservation.</span>
+                <span id="booking-end" class="card-text">Votre réservation a expirée</span>
+                <div id="booking-details">
+                    <p class="card-text">Station: <span id="booking-name"></span></p>
+                    <p class="card-text">Lieu: <span id="booking-address"></span></p>
+                    <p class="card-text">Votre réservation expirera dans <span id="booking-time"></span> minutes</p>
+
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</div>
+<script src="/public/js/app.js"></script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ1dyOZiTYP6RulxX3TrDv4hNMfrFlwcU&callback=initMap"></script>
+</body>
+</html>
