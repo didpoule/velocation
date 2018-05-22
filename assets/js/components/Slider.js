@@ -12,6 +12,7 @@ export default class Slider extends Component {
         this.index = 0;
         this.autoId = null;
         this.slideDelay = 10000;
+        this.sliderControll = this.sliderControll.bind(this);
 
     }
 
@@ -33,51 +34,31 @@ export default class Slider extends Component {
         $(this.container).height(this.current.height());
     }
 
-    previous(stop = false) {
+    previous() {
         this.index--;
         this.setCurrent();
         this.render();
-
-        if (stop === true) {
-            this.stopSlide();
-        }
     }
 
-    next(stop = false) {
+    next() {
         this.index++;
         this.setCurrent();
         this.render();
-
-        if (stop === true) {
-            this.stopSlide();
-        }
     }
 
-    setListeners() {
-        this.previousButton.click(() => {
-            this.previous(true)
-        });
-        this.nexButton.click(() => {
-            this.next(true)
-        });
-        $(document).keydown((e) => {
-            switch (e.key) {
-                case 'ArrowLeft' :
-                    this.previous(true);
-                    break;
-                case 'ArrowRight':
-                    this.next(true);
-                    break;
+    sliderControll(e) {
+        switch (e.key) {
+            case 'ArrowLeft' :
+                this.previous();
+                break;
+            case 'ArrowRight':
+                this.next();
+                break;
+        }
 
-                case 'ArrowUp':
-                    console.log(this.current.height());
-                    break;
-                default:
-                    e.preventDefault();
-                    e.stopPropagation();
-                    break;
-            }
-        });
+    }
+    setListeners() {
+        $(document).keydown(this.sliderControll);
 
         // Responsivité conteneur
         $(window).resize(() => {
@@ -99,9 +80,9 @@ export default class Slider extends Component {
         this.e.addEventListener("touchend", () => {
             if (endX != null && startX != null) {
                 if (endX < startX && (startX - endX) > 20) {
-                    this.next(true);
+                    this.next();
                 } else if (endX > startX && (endX - startX) > 20) {
-                    this.previous(true);
+                    this.previous();
                 }
                 endX = null;
                 startX = null;

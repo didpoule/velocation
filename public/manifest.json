@@ -1,4 +1,4 @@
 {
-  "public/js/app.js": "/public/js/app.js",
-  "public/css/app.css": "/public/css/app.css"
+  "public/js/app.js": "http://localhost:8080/public/js/app.js",
+  "public/css/app.css": "http://localhost:8080/public/css/app.css"
 }
