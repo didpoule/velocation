@@ -4,7 +4,7 @@ import Alert from './Alert';
 import $ from 'jquery';
 
 export default class Booking extends Component {
-    constructor(e) {
+    constructor(e, datas = null) {
         super(e);
         this.storage = null;
         this.bookingDetails = document.getElementById('booking-details');
@@ -14,13 +14,38 @@ export default class Booking extends Component {
         this.bookingEnd = document.getElementById('booking-end');
         this.bookingDefault = document.getElementById('booking-default');
         this.alert = null;
+        this.datas = datas;
     }
 
     // Création de l'instance pour stockage
-    init(datas) {
-        this.storage = new StorageManager(datas, this);
-        this.storage.init();
+    init() {
+        if (this.storage === null) {
+            this.storage = new StorageManager(this.datas, this);
+        }
 
+
+
+        // On vérifie si la page a été raffraichie
+        if (this.datas === null) {
+            this.storage.retrieve();
+
+            // Si on récupère les données, on initialise le timer et on met a jour l'affichage
+            if (this.storage.stationId != null) {
+                this.storage.save();
+                this.storage.setTimer();
+                this.render();
+            }
+
+            // Si réservation par bouton station
+        } else {
+            this.storage.init();
+        }
+
+    }
+
+    setDatas(datas) {
+        this.datas = datas;
+        this.storage.datas = this.storage.datas = this.datas;
     }
 
     // Affichage temps restant dynamique

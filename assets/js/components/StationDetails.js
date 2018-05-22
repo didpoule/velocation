@@ -5,7 +5,7 @@ import Alert from "./Alert";
 import $ from "jquery";
 
 export default class StationDetails extends ComponentAPI {
-    constructor(e, k, u) {
+    constructor(e, k, u, booking) {
         super(e, k, u);
         this.booking = null;
         this.marker = null;
@@ -31,7 +31,7 @@ export default class StationDetails extends ComponentAPI {
             this.button.style.display = 'block';
         };
         this.buttonEventToggle();
-        this.booking = new Booking(document.getElementById('booking-informations'));
+        this.booking = booking;
 
     }
 
@@ -46,7 +46,7 @@ export default class StationDetails extends ComponentAPI {
             params.classes = "alert alert-danger";
         }
         // Si plus de vélos
-         else if (type === 'unavailable') {
+        else if (type === 'unavailable') {
             params.content = "Il n'y a plus de vélos disponibles à cette station. Veuillez en choisir une autre";
             params.classes = "alert alert-warning";
         }
@@ -99,11 +99,12 @@ export default class StationDetails extends ComponentAPI {
                     this.createAlert().render();
                 } else {
                     // Sauvegarde de la réservation
-                    this.booking.init({
+                    this.booking.setDatas({
                         id: this.marker.id,
                         name: this.marker.name,
                         address: this.marker.address
                     });
+                    this.booking.init();
 
                     // Mise à jour affichage
                     this.canvas.hide();
@@ -121,6 +122,7 @@ export default class StationDetails extends ComponentAPI {
         })
 
     }
+
     // Récupération des donnés de la station
     updateValues(marker) {
         this.marker = marker;
@@ -138,8 +140,8 @@ export default class StationDetails extends ComponentAPI {
             this.status.classList.add('text-success');
             this.status.classList.remove('text-danger');
         } else {
-                this.status.classList.remove('text-success');
-                this.status.classList.add('text-danger');
+            this.status.classList.remove('text-success');
+            this.status.classList.add('text-danger');
         }
 
         this.bikesFree.innerHTML = this.marker.available_bikes;
@@ -160,7 +162,8 @@ export default class StationDetails extends ComponentAPI {
             this.button.classList.add('btn-primary');
         }
     }
-    removeAlert () {
+
+    removeAlert() {
         if (this.alert !== null) {
             this.alert.remove();
         }

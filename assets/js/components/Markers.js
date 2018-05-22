@@ -3,13 +3,14 @@ import StationDetails from "./StationDetails";
 import $ from 'jquery';
 
 export default class Markers extends ComponentAPI {
-    constructor(k, u, map) {
+    constructor(k, u, map, booking) {
         super(null, k, u);
         this.labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         this.request = new XMLHttpRequest();
         this.url = null;
         this.map = map;
         this.setURL();
+        this.booking = booking;
     }
 
     setURL() {
@@ -58,7 +59,7 @@ export default class Markers extends ComponentAPI {
             [
                 'https://maps.googleapis.com/maps/api/streetview?size=640x240&location=',
                 '&heading=151.78&pitch=-0.76&key='
-            ]);
+            ], this.booking);
 
         // Ajout du trigger clique sur marqueur pour mettre à jour le formulaire
         for (let i = 0; i < this.list.length; i++) {

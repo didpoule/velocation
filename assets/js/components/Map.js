@@ -2,12 +2,13 @@ import ComponentAPI from './ComponentAPI';
 import Markers from './Markers';
 
 export default class Map extends ComponentAPI {
-    constructor(e, k, u) {
+    constructor(e, k, u, booking) {
         super(e, k, u);
         this.initMap = this.initMap.bind(this);
         this.request = new XMLHttpRequest();
         this.map = null;
         this.markers = null;
+        this.booking = booking;
     }
 
     /**
@@ -24,7 +25,7 @@ export default class Map extends ComponentAPI {
             center: {lat: 45.757934, lng: 4.8552035}
         });
 
-        this.markers = new Markers(this.k, this.u, this.map);
+        this.markers = new Markers(this.k, this.u, this.map, this.booking);
 
         // Initialisation Markers
         this.markers.sendRequest();
