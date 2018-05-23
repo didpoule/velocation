@@ -11,7 +11,7 @@ export default class StorageManager {
 
         this.renderer = renderer;
         this.datas = datas;
-        this.duration = 1200000;
+        this.duration = null;
 
     }
 
@@ -38,6 +38,7 @@ export default class StorageManager {
             this.stationId = this.datas.id;
             this.stationName = this.datas.name;
             this.stationPlace = this.datas.address;
+            this.duration = 1200000;
             this.endTime = Date.now() + this.duration;
 
         }
