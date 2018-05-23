@@ -15,5 +15,10 @@
     margin-bottom: 20px;
   }
 
+}
 
+@media screen and (max-width: 736px) {
+  #footer {
+    font-size: .8em;
+  }
 }
