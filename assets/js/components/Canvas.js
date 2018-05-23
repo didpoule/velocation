@@ -9,6 +9,8 @@ export default class Canvas {
         this.elementOffset = null;
         this.lastX = null;
         this.lastY = null;
+        this.tactile = false;
+
         this.initDraw();
         this.clear = this.clear.bind(this);
         window.clearCanvas = this.clear;
@@ -48,13 +50,28 @@ export default class Canvas {
             // Calcule la position réelle de l'élement
             this.elementOffset = this.offset();
             // Calcule de la position relative pour dessiner sous le curseur
-            this.draw(e.pageX - this.elementOffset.left, e.pageY - this.elementOffset.top, false);
+            if (this.tactile) {
+                this.draw(e.pageX - this.elementOffset.left, e.clientY - this.elementOffset.top, false);
+
+            } else {
+
+                this.draw(e.pageX - this.elementOffset.left, e.pageY - this.elementOffset.top, false);
+            }
+
         });
 
         this.canvas.addEventListener('mousemove', (e) => {
             if (mousePressed) {
                 this.elementOffset = this.offset();
-                this.draw(e.pageX - this.elementOffset.left, e.pageY - this.elementOffset.top, true);
+
+                if (this.tactile) {
+                    this.draw(e.pageX - this.elementOffset.left, e.clientY - this.elementOffset.top, true);
+
+                } else {
+
+                    this.draw(e.pageX - this.elementOffset.left, e.pageY - this.elementOffset.top, true);
+                }
+
             }
         });
 
@@ -65,18 +82,32 @@ export default class Canvas {
             });
         });
 
-        this.canvas.addEventListener('touchstart', (e) => { this.handleStart(e) }, true);
-        this.canvas.addEventListener('touchend', (e) => { this.handleEnd(e) }, true);
-        this.canvas.addEventListener('touchmove', (e) => { this.handleMove(e) }, true);
+        this.canvas.addEventListener('touchstart', (e) => {
+            this.handleStart(e)
+        }, true);
+        this.canvas.addEventListener('touchend', (e) => {
+            this.handleEnd(e)
+        }, true);
+        this.canvas.addEventListener('touchmove', (e) => {
+            this.handleMove(e)
+        }, true);
     }
 
     offset() {
         let rect = this.canvas.getBoundingClientRect();
         let bodyElement = document.documentElement;
 
-        return {
-            top: rect.top + $(window).scrollTop(),
-            left: rect.left + $(window).scrollLeft()
+        if (this.tactile) {
+            return  {
+                top: rect.top + bodyElement.scrollTop,
+                left: rect.left + bodyElement.scrollLeft
+            }
+        } else {
+
+            return  {
+                top: rect.top + $(window).scrollTop(),
+                left: rect.left + $(window).scrollLeft()
+            }
         }
     }
 
@@ -98,15 +129,14 @@ export default class Canvas {
     }
 
     handleStart(e) {
+        this.tactile = true;
         e.preventDefault();
         this.elementOffset = this.offset();
         let touch = e.touches[0];
         let mouseEvent = new MouseEvent("mousedown", {
-            clientX: touch.clientX ,
+            clientX: touch.clientX,
             clientY: touch.clientY + document.documentElement.scrollTop
         });
-
-        //console.log(mouseEvent.clientY);
 
         this.canvas.dispatchEvent(mouseEvent);
     }
@@ -117,6 +147,7 @@ export default class Canvas {
     }
 
     handleMove(e) {
+        this.tactile = true;
         e.preventDefault();
         let touch = e.touches[0];
 
@@ -125,5 +156,28 @@ export default class Canvas {
             clientY: touch.clientY + document.documentElement.scrollTop
         });
         this.canvas.dispatchEvent(mouseEvent);
+    }
+
+    get_browser_info() {
+        var ua = navigator.userAgent, tem,
+            M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+        if (/trident/i.test(M[1])) {
+            tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+            return {name: 'IE ', version: (tem[1] || '')};
+        }
+        if (M[1] === 'Chrome') {
+            tem = ua.match(/\bOPR\/(\d+)/)
+            if (tem != null) {
+                return {name: 'Opera', version: tem[1]};
+            }
+        }
+        M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+        if ((tem = ua.match(/version\/(\d+)/i)) != null) {
+            M.splice(1, 1, tem[1]);
+        }
+        return {
+            name: M[0],
+            version: M[1]
+        };
     }
 }
