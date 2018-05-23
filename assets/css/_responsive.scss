@@ -1,4 +1,9 @@
 @media screen and (max-width: 1024px) {
+
+  header .container.flex {
+    width: 100%;
+  }
+
   .flex {
     flex-wrap: wrap-reverse;
   }
@@ -9,4 +14,6 @@
   #station-summary {
     margin-bottom: 20px;
   }
+
+
 }
