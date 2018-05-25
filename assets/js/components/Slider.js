@@ -54,6 +54,8 @@ export default class Slider extends Component {
             case 'ArrowRight':
                 this.next();
                 break;
+            case 'ArrowLeft', 'ArrowRight' :
+                e.key.stopPropagation();
         }
 
     }
