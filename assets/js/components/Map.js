@@ -1,6 +1,7 @@
 import ComponentAPI from './ComponentAPI';
 import Markers from './Markers';
 
+// Cette classe affiche la carte google map
 export default class Map extends ComponentAPI {
     constructor(e, k, u, booking) {
         super(e, k, u);

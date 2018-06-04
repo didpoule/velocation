@@ -1,5 +1,6 @@
 import $ from 'jquery';
 
+// Cette classe gère le dessin dans le canvas de réservation
 export default class Canvas {
 
     constructor() {
@@ -128,6 +129,7 @@ export default class Canvas {
 
     }
 
+    // Prise en charge du tactile
     handleStart(e) {
         this.tactile = true;
         e.preventDefault();
@@ -141,11 +143,13 @@ export default class Canvas {
         this.canvas.dispatchEvent(mouseEvent);
     }
 
+    // Prise en charge du tactile
     handleEnd(e) {
         let mouseEvent = new MouseEvent("mouseup", {});
         this.canvas.dispatchEvent(mouseEvent);
     }
 
+    // Prise en charge du tactile
     handleMove(e) {
         this.tactile = true;
         e.preventDefault();
@@ -156,28 +160,5 @@ export default class Canvas {
             clientY: touch.clientY + document.documentElement.scrollTop
         });
         this.canvas.dispatchEvent(mouseEvent);
-    }
-
-    get_browser_info() {
-        var ua = navigator.userAgent, tem,
-            M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
-        if (/trident/i.test(M[1])) {
-            tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
-            return {name: 'IE ', version: (tem[1] || '')};
-        }
-        if (M[1] === 'Chrome') {
-            tem = ua.match(/\bOPR\/(\d+)/)
-            if (tem != null) {
-                return {name: 'Opera', version: tem[1]};
-            }
-        }
-        M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
-        if ((tem = ua.match(/version\/(\d+)/i)) != null) {
-            M.splice(1, 1, tem[1]);
-        }
-        return {
-            name: M[0],
-            version: M[1]
-        };
     }
 }

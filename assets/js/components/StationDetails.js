@@ -4,6 +4,7 @@ import Booking from "./Booking";
 import Alert from "./Alert";
 import $ from "jquery";
 
+// Cette classe gère la mise à jour de l'affichage des détails d'une station
 export default class StationDetails extends ComponentAPI {
     constructor(e, k, u, booking) {
         super(e, k, u);

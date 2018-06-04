@@ -1,3 +1,4 @@
+// Cette classe gère le stoackage de la réservation dans le Local Storage
 export default class StorageManager {
     constructor(datas = {}, renderer) {
         this.stationId = null;
@@ -24,11 +25,13 @@ export default class StorageManager {
         this.renderer.render();
     }
 
+    // Vérifie si toutes les données de réservation sont renseignées
     isNull() {
         return ((this.stationName === null) || (this.stationPlace === null) ||
             (this.stationId == null));
     }
 
+    // Définit les données de réservation
     setDatas() {
         if (sessionStorage.name != null || sessionStorage.place != null || sessionStorage.id != null) {
             this.clear(false);
@@ -65,6 +68,7 @@ export default class StorageManager {
         }
     }
 
+    // Stocke la réservation dans le localstorage
     save() {
         sessionStorage.setItem('id', this.stationId);
         sessionStorage.setItem('name', this.stationName);
@@ -73,7 +77,7 @@ export default class StorageManager {
 
     }
 
-
+    // Appel arret des timers et supression des données du lcaolstorage
     clear(render = true) {
         sessionStorage.clear();
 
@@ -88,6 +92,7 @@ export default class StorageManager {
         this.stationPlace = null;
     }
 
+    // Démarrage du timer de réservation
     setTimer() {
 
         // Temps restant
@@ -109,6 +114,7 @@ export default class StorageManager {
 
     }
 
+    // Arret des timers
     stopTimer() {
         clearTimeout(this.timer);
         clearInterval(this.decount);

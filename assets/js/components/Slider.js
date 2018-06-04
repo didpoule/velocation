@@ -6,16 +6,11 @@ export default class Slider extends Component {
         super(e);
         this.images = $(this.e).find('img');
         this.container = $('#slider-pictures');
-        this.navContainer = $('#slider-nav');
-        this.previousButton = $('#slider-previous');
-        this.nexButton = $('#slider-next');
         this.index = 0;
         this.autoId = null;
         this.slideDelay = 10000;
         this.sliderControll = this.sliderControll.bind(this);
-
     }
-
 
     init() {
         this.setListeners();

@@ -45,7 +45,7 @@ export default class Booking extends Component {
 
     setDatas(datas) {
         this.datas = datas;
-        this.storage.datas = this.storage.datas = this.datas;
+        this.storage.datas = this.datas;
     }
 
     // Affichage temps restant dynamique

@@ -21,6 +21,7 @@ window.timeConversion = function (millis) {
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 };
 
+// Cette classe initialise les composants de l'application
 class App {
     constructor() {
         this.booking = new Booking(document.getElementById('booking-informations'));

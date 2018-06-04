@@ -1,3 +1,4 @@
+// Cette classe génère de alerte bootstrap et les affiche
 export default class Alert {
     constructor(params) {
         this.element = null;

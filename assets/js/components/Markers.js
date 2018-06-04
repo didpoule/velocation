@@ -2,6 +2,7 @@ import ComponentAPI from './ComponentAPI';
 import StationDetails from "./StationDetails";
 import $ from 'jquery';
 
+// Cette classe créée des marqueurs sur la carte google maps
 export default class Markers extends ComponentAPI {
     constructor(k, u, map, booking) {
         super(null, k, u);
@@ -36,6 +37,7 @@ export default class Markers extends ComponentAPI {
             // Traduction du statut
             location.status = (location.status === 'OPEN') ? 'Ouverte' : 'Fermée';
 
+            // hydratation d'un nouveau marker
             return new google.maps.Marker({
                 id: location.number,
                 position: location.position,
