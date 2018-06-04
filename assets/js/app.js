@@ -26,7 +26,7 @@ class App {
     constructor() {
         this.booking = new Booking(document.getElementById('booking-informations'));
 
-        this.jcdK = 'clé API JCDecaux';
+        this.jcdK = '64e67bb866a2e8469869909a9502f86b8f893beb';
         this.slider = new Slider(document.getElementById('slider'));
         this.map = new Map(document.getElementById('map-container'), this.jcdK, 'https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=', this.booking);
     }
